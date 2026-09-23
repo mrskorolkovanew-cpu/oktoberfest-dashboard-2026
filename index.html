@@ -64,6 +64,7 @@
           <button class="view-tab is-active" type="button" data-view-target="overview-panel">Обзор</button>
           <button class="view-tab" type="button" data-view-target="schedule-panel">График задач <span id="task-total"></span></button>
           <button class="view-tab" type="button" data-view-target="program-panel">Программа мероприятий</button>
+          <button class="view-tab" type="button" data-view-target="budget-panel">Бюджет</button>
         </nav>
 
         <section id="overview-panel" class="view-panel is-active">
@@ -131,6 +132,61 @@
               <button class="text-action" type="button" data-show-schedule>Открыть весь график →</button>
             </div>
             <div class="workstream-grid" id="workstream-grid"></div>
+          </section>
+        </section>
+
+        <section id="budget-panel" class="view-panel">
+          <div class="schedule-heading">
+            <div>
+              <p class="section-label">Бюджет Октоберфеста</p><h2>Расчётная модель</h2>
+              <p>Данные загружены из файла «Бюджет Октоберфест». Модель ещё не утверждена.</p>
+            </div>
+            <a class="text-action" href="Бюджет Октоберфест.xlsx" target="_blank" rel="noopener">Открыть исходный файл →</a>
+          </div>
+
+          <div class="kpi-grid" aria-label="Ключевые показатели бюджета">
+            <article class="kpi-card"><p>Доходы</p><strong>12,50 млн ₽</strong><span>5 000 гостей × средний чек 2 500 ₽</span></article>
+            <article class="kpi-card"><p>Расходы</p><strong>5,67 млн ₽</strong><span>по расчётной модели</span></article>
+            <article class="kpi-card"><p>Расчётная прибыль</p><strong>6,83 млн ₽</strong><span>доходы за вычетом расходов</span></article>
+            <article class="kpi-card"><p>Маржинальность</p><strong>54,6%</strong><span>расчётная прибыль / доходы</span></article>
+          </div>
+
+          <section class="panel budget-panel">
+            <div class="panel-heading">
+              <div><p class="section-label">Параметры модели</p><h2>Исходные допущения</h2></div>
+              <span class="budget-badge">Не утвержден. В разработке.</span>
+            </div>
+            <div class="budget-grid">
+              <div class="budget-status"><p>Статус бюджета</p><strong>Расчётная модель</strong><span>Финальные суммы требуют согласования.</span></div>
+              <dl class="budget-list">
+                <div><dt>Средний чек</dt><dd>2 500 ₽</dd></div>
+                <div><dt>Посещаемость</dt><dd>5 000 гостей</dd></div>
+                <div><dt>Себестоимость фуда</dt><dd>23%</dd></div>
+                <div><dt>Дней работы</dt><dd>3</dd></div>
+                <div><dt>Призовой фонд в день</dt><dd>20 000 ₽</dd></div>
+                <div><dt>Маркетинг VK</dt><dd>400 000 ₽</dd></div>
+              </dl>
+            </div>
+          </section>
+
+          <section class="panel budget-breakdown-panel">
+            <div class="panel-heading"><div><p class="section-label">Структура расходов</p><h2>Ключевые статьи</h2></div></div>
+            <div class="table-wrap">
+              <table class="budget-table">
+                <thead><tr><th>Статья</th><th>Сумма</th><th>Доля расходов</th></tr></thead>
+                <tbody>
+                  <tr><td>Еда</td><td>2 875 000 ₽</td><td>50,7%</td></tr>
+                  <tr><td>Аренда оборудования для анимации</td><td>840 000 ₽</td><td>14,8%</td></tr>
+                  <tr><td>ФОТ фуд</td><td>741 000 ₽</td><td>13,1%</td></tr>
+                  <tr><td>Оборудование для фуда</td><td>450 000 ₽</td><td>7,9%</td></tr>
+                  <tr><td>Реклама и продвижение VK</td><td>400 000 ₽</td><td>7,1%</td></tr>
+                  <tr><td>Изготовление и поставка рекламного баннера</td><td>30 000 ₽</td><td>0,5%</td></tr>
+                  <tr><td>ФОТ событий</td><td>224 468 ₽</td><td>4,0%</td></tr>
+                  <tr><td>Призовой фонд</td><td>60 000 ₽</td><td>1,1%</td></tr>
+                  <tr><td>Расходники для мастер-классов</td><td>50 000 ₽</td><td>0,9%</td></tr>
+                </tbody>
+              </table>
+            </div>
           </section>
         </section>
 
