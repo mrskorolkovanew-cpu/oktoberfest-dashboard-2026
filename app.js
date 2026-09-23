@@ -111,7 +111,7 @@ function renderTaskTable() {
   });
   one("#visible-task-count").textContent = "Показано: " + filtered.length + " из " + tasks.length;
   one("#task-table-body").innerHTML = filtered.map(function (task) {
-    return '<tr><td>' + task.id + '</td><td>' + task.stream + '</td><td>' + task.title + '</td><td>' + task.due + '</td><td>' + task.owner + '</td><td><span class="task-status task-status--' + statusClass(task.status) + '">' + task.status + '</span></td></tr>';
+    return '<tr><td>' + task.id + '</td><td>' + task.title + '</td><td>' + task.due + '</td><td>' + task.owner + '</td><td><span class="task-status task-status--' + statusClass(task.status) + '">' + task.status + '</span></td></tr>';
   }).join("");
 }
 
