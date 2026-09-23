@@ -7,7 +7,7 @@
     <meta name="theme-color" content="#163a5f" />
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23163a5f'/%3E%3Cpath d='M18 18h28v8H18zm3 11h22l-3 19H24z' fill='%23f4bb36'/%3E%3Cpath d='M26 35h12' stroke='%23163a5f' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E" />
     <title>Октоберфест 2026 — дашборд подготовки</title>
-    <link rel="stylesheet" href="styles.css?v=20260923-3" />
+    <link rel="stylesheet" href="styles.css?v=20260923-4" />
     <script defer src="app.js?v=20260923-3"></script>
   </head>
   <body>
@@ -28,6 +28,10 @@
 
       <main>
         <section class="hero" id="overview">
+          <article class="hero-budget" aria-label="Статус бюджета">
+            <span>Бюджет</span>
+            <strong>Не утвержден.<br />В разработке.</strong>
+          </article>
           <div class="event-window">
             <span>Окно фестиваля</span>
             <strong>23–25.10</strong>
@@ -37,10 +41,12 @@
             <article class="hero-detail">
               <p class="section-label">Выбранные локации</p>
               <ul class="location-list">
-                <li>Сцена и анимация</li>
-                <li>Фуд- и гриль-зона</li>
-                <li>Лаунж-зона</li>
-                <li>Мастер-классы и активности</li>
+                <li><strong>Фуд:</strong> парк и сцена; при плохой погоде — район Лофта и Лофт</li>
+                <li><strong>Фудовый МК:</strong> шатёр около Альпак; при плохой погоде — район Лофта</li>
+                <li><strong>Детские МК:</strong> площадь перед сценой</li>
+                <li><strong>Интерактивы:</strong> аллея у Блинной, Кофе Джой, фуд-корт у верёвочного парка, шатёр Нитро</li>
+                <li><strong>Ведущий и DJ:</strong> сцена; при плохой погоде — сцена Лофта</li>
+                <li><strong>Спорт-бар:</strong> Лофт</li>
               </ul>
             </article>
             <article class="hero-detail">
@@ -57,6 +63,7 @@
         <nav class="view-tabs" aria-label="Разделы дашборда">
           <button class="view-tab is-active" type="button" data-view-target="overview-panel">Обзор</button>
           <button class="view-tab" type="button" data-view-target="schedule-panel">График задач <span id="task-total"></span></button>
+          <button class="view-tab" type="button" data-view-target="program-panel">Программа мероприятий</button>
         </nav>
 
         <section id="overview-panel" class="view-panel is-active">
@@ -93,15 +100,6 @@
               </ol>
             </article>
           </div>
-
-          <section class="panel budget-panel" aria-label="Статус бюджета">
-            <div class="panel-heading">
-              <div><h2>Бюджет</h2></div>
-            </div>
-            <div class="budget-status">
-              <strong>Не утвержден. В разработке.</strong>
-            </div>
-          </section>
 
           <div class="dashboard-grid dashboard-grid--secondary">
             <article class="panel focus-panel">
@@ -155,6 +153,72 @@
               <tbody id="task-table-body"></tbody>
             </table>
           </div>
+        </section>
+
+        <section id="program-panel" class="view-panel">
+          <div class="schedule-heading">
+            <div>
+              <p class="section-label">Октоберфест 2026</p><h2>Программа мероприятий</h2>
+              <p>Расписание составлено по утверждённому таймингу и программе фестиваля.</p>
+            </div>
+            <span class="calendar-badge">23–25.10</span>
+          </div>
+
+          <div class="program-days">
+            <article class="program-day">
+              <div class="program-day-heading"><span>23.10</span><small>Пятница · 16:00–22:00</small></div>
+              <ol>
+                <li><time>16:00–19:00</time><div><strong>Интерактивы по парку</strong><p>Самостоятельное участие гостей в активностях.</p></div></li>
+                <li><time>17:00–18:00</time><div><strong>«Сказочная рулька»</strong><p>По сигналу ведущего в парке.</p></div></li>
+                <li><time>19:00–20:00</time><div><strong>«Сказочная рулька»</strong><p>Повторный выход по сигналу ведущего.</p></div></li>
+              </ol>
+            </article>
+
+            <article class="program-day">
+              <div class="program-day-heading"><span>24.10</span><small>Суббота · 10:00–22:00</small></div>
+              <ol>
+                <li><time>11:00–14:00</time><div><strong>Детские мастер-классы</strong><p>Площадь перед сценой.</p></div></li>
+                <li><time>13:00–15:00</time><div><strong>«Сказочная рулька»</strong><p>По сигналу ведущего в парке.</p></div></li>
+                <li><time>14:00–18:00</time><div><strong>Интерактивы с ведущим</strong><p>Выходы на сцене каждый час на 30–45 минут.</p></div></li>
+                <li><time>14:00–19:00</time><div><strong>Интерактивы по парку</strong><p>Фестивальный формат.</p></div></li>
+                <li><time>18:00–20:00</time><div><strong>«Сказочная рулька»</strong><p>По сигналу ведущего в парке.</p></div></li>
+                <li><time>18:00–21:00</time><div><strong>DJ-сет на сцене</strong><p>Сначала тематический, затем популярная программа.</p></div></li>
+              </ol>
+            </article>
+
+            <article class="program-day">
+              <div class="program-day-heading"><span>25.10</span><small>Воскресенье · 10:00–22:00</small></div>
+              <ol>
+                <li><time>11:00–14:00</time><div><strong>Детские мастер-классы</strong><p>Площадь перед сценой.</p></div></li>
+                <li><time>13:00–15:00</time><div><strong>«Сказочная рулька»</strong><p>По сигналу ведущего в парке.</p></div></li>
+                <li><time>14:00–18:00</time><div><strong>Интерактивы с ведущим</strong><p>Сцена.</p></div></li>
+                <li><time>14:00–19:00</time><div><strong>Интерактивы по парку</strong><p>Фестивальный формат.</p></div></li>
+                <li><time>16:00–18:00</time><div><strong>Спорт-бар</strong><p>Трансляция матча ЦСКА — Спартак в Лофте.</p></div></li>
+                <li><time>18:00–20:00</time><div><strong>«Сказочная рулька»</strong><p>По сигналу ведущего в парке.</p></div></li>
+              </ol>
+            </article>
+          </div>
+
+          <div class="program-note">Трансляция «Барселона — Реал Мадрид» в 23:00 рассматривается отдельно и не включена в основное окно фестиваля.</div>
+
+          <section class="program-library" aria-label="Наполнение программы">
+            <article class="program-content-card">
+              <p class="section-label">Фудовый мастер-класс</p><h3>Брецель</h3>
+              <p>Каждые 1,5–2 часа. Шатёр около Альпак; при плохой погоде — район Лофта.</p>
+            </article>
+            <article class="program-content-card">
+              <p class="section-label">Детские мастер-классы</p><h3>Творческая программа</h3>
+              <p>«Крендель-мастерская», «Осенний гербарий», «Музыкальная шкатулка», «Пряничная подкова».</p>
+            </article>
+            <article class="program-content-card">
+              <p class="section-label">Активности по парку</p><h3>4 точки интерактива</h3>
+              <p>Гонки с кружками, «Угадай сорт пива», метание брецеля и бирпонг.</p>
+            </article>
+            <article class="program-content-card">
+              <p class="section-label">Активности ведущего</p><h3>Сцена</h3>
+              <p>«Громовой удар», «Держи кружку», поедание сосисок и викторина по Октоберфесту.</p>
+            </article>
+          </section>
         </section>
       </main>
 
