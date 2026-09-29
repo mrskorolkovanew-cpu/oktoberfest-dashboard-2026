@@ -41,7 +41,7 @@ function isOnOrBeforeReportDate(date) {
   return new Date(year, month - 1, day) <= new Date(reportYear, reportMonth - 1, reportDay);
 }
 
-const tasks = rawTasks.map(function (row) {
+let tasks = rawTasks.map(function (row) {
   const cells = row.split("|");
   return {
     id: cells[0],
@@ -53,6 +53,9 @@ const tasks = rawTasks.map(function (row) {
   };
 });
 
+const scheduleFile = "График_подготовки_Октоберфест.xlsx";
+const fallbackById = new Map(tasks.map(function (task) { return [String(task.id).replace(/\.$/, ""), task]; }));
+
 const statusMeta = {
   "Выполнено": { label: "Выполнено", color: "#3d8a61", css: "done" },
   "Частично выполнено": { label: "В работе и частично", color: "#5b9bd5", css: "partial" },
@@ -61,6 +64,82 @@ const statusMeta = {
   "Ожидает решения": { label: "Ожидает решения", color: "#d87932", css: "decision" }
 };
 const statusOrder = ["Выполнено", "В работе", "Частично выполнено", "Не начато", "Ожидает решения"];
+
+function normalizeDate(value) {
+  if (typeof value === "number" && window.XLSX) {
+    const date = XLSX.SSF.parse_date_code(value);
+    if (date) return String(date.d).padStart(2, "0") + "." + String(date.m).padStart(2, "0") + "." + date.y;
+  }
+  if (value instanceof Date && !Number.isNaN(value.valueOf())) {
+    return String(value.getDate()).padStart(2, "0") + "." + String(value.getMonth() + 1).padStart(2, "0") + "." + value.getFullYear();
+  }
+  const text = String(value || "").trim();
+  const iso = text.match(/^(\d{4})-(\d{2})-(\d{2})/);
+  if (iso) return iso[3] + "." + iso[2] + "." + iso[1];
+  return text;
+}
+
+function statusFromNote(note, fallbackStatus) {
+  const value = String(note || "").trim().toLowerCase();
+  if (value.includes("выполнено частично")) return "Частично выполнено";
+  if (value.includes("выполнено") && !value.includes("не выполнено")) return "Выполнено";
+  if (value.includes("принято решение")) return "Выполнено";
+  if (value.includes("изготовлено")) return "Частично выполнено";
+  return fallbackStatus || "Не начато";
+}
+
+function loadSpreadsheetLibrary() {
+  if (window.XLSX) return Promise.resolve();
+  return new Promise(function (resolve, reject) {
+    const script = document.createElement("script");
+    script.src = "https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js";
+    script.onload = resolve;
+    script.onerror = function () { reject(new Error("Не удалось подключить модуль чтения графика")); };
+    document.head.append(script);
+  });
+}
+
+async function loadTasksFromSchedule() {
+  try {
+    await loadSpreadsheetLibrary();
+    const response = await fetch(encodeURI(scheduleFile), { cache: "no-store" });
+    if (!response.ok) throw new Error("График пока недоступен");
+    const workbook = XLSX.read(await response.arrayBuffer(), { type: "array", cellDates: true });
+    const sheet = workbook.Sheets[workbook.SheetNames[0]];
+    const rows = XLSX.utils.sheet_to_json(sheet, { header: 1, raw: true, defval: "" });
+    const headerRow = rows.findIndex(function (row) {
+      return String(row[0]).trim() === "№" && String(row[1]).trim() === "Задача";
+    });
+    if (headerRow < 0) throw new Error("Не найдена строка заголовков");
+    const headers = rows[headerRow].map(function (value) { return String(value).trim(); });
+    const idColumn = headers.indexOf("№");
+    const titleColumn = headers.indexOf("Задача");
+    const startColumn = headers.indexOf("Начало");
+    const dueColumn = headers.indexOf("Окончание / срок");
+    const noteColumn = headers.indexOf("Примечание");
+    const importedTasks = rows.slice(headerRow + 1)
+      .filter(function (row) { return String(row[idColumn] || "").trim() && String(row[titleColumn] || "").trim(); })
+      .map(function (row) {
+        const id = String(row[idColumn]).trim().replace(/\.$/, "");
+        const fallback = fallbackById.get(id);
+        return {
+          id: id,
+          stream: fallback ? fallback.stream : "Не указано",
+          title: String(row[titleColumn]).trim(),
+          start: normalizeDate(row[startColumn]),
+          due: normalizeDate(row[dueColumn]),
+          status: statusFromNote(noteColumn >= 0 ? row[noteColumn] : "", fallback && fallback.status)
+        };
+      });
+    if (!importedTasks.length) throw new Error("В графике нет задач");
+    one("#source-status").textContent = "Источник: график подготовки";
+    return importedTasks;
+  } catch (error) {
+    one("#source-status").textContent = "Источник: резервная версия графика";
+    console.warn("Не удалось загрузить график подготовки", error);
+    return tasks;
+  }
+}
 
 function one(selector) {
   return document.querySelector(selector);
@@ -109,12 +188,12 @@ function renderWorkstreams() {
 
 function renderFilters() {
   const streams = Array.from(new Set(tasks.map(function (task) { return task.stream; })));
-  one("#status-filter").insertAdjacentHTML("beforeend", statusOrder.map(function (status) {
+  one("#status-filter").innerHTML = '<option value="all">Все статусы</option>' + statusOrder.map(function (status) {
     return '<option value="' + status + '">' + status + '</option>';
-  }).join(""));
-  one("#stream-filter").insertAdjacentHTML("beforeend", streams.map(function (stream) {
+  }).join("");
+  one("#stream-filter").innerHTML = '<option value="all">Все направления</option>' + streams.map(function (stream) {
     return '<option value="' + stream + '">' + stream + '</option>';
-  }).join(""));
+  }).join("");
 }
 
 function renderTaskTable() {
@@ -152,7 +231,17 @@ document.querySelectorAll("[data-show-overview]").forEach(function (button) {
 one("#status-filter").addEventListener("change", renderTaskTable);
 one("#stream-filter").addEventListener("change", renderTaskTable);
 
-renderProgress();
-renderWorkstreams();
-renderFilters();
-renderTaskTable();
+function renderDashboard() {
+  renderProgress();
+  renderWorkstreams();
+  renderFilters();
+  renderTaskTable();
+}
+
+async function initializeDashboard() {
+  renderDashboard();
+  tasks = await loadTasksFromSchedule();
+  renderDashboard();
+}
+
+initializeDashboard();
