@@ -155,18 +155,21 @@ a.text-action { display: inline-block; text-decoration: none; }
 .filters select { min-width: 185px; color: var(--ink); background: var(--paper); border: 1px solid var(--line); border-radius: 7px; padding: 8px 10px; }
 .filters p { margin: 0 0 8px auto; color: var(--muted); font-size: 12px; }
 .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; background: var(--paper); box-shadow: var(--shadow); }
-table { width: 100%; border-collapse: collapse; min-width: 820px; }
+table { width: 100%; border-collapse: collapse; min-width: 1080px; }
 thead { background: var(--navy-deep); color: #fff; }
 th { text-align: left; padding: 12px 13px; font-size: 11px; letter-spacing: .025em; }
 td { border-top: 1px solid var(--line); padding: 11px 13px; vertical-align: top; color: #506171; font-size: 12px; line-height: 1.35; }
 td:first-child { color: var(--navy); font-weight: 800; width: 45px; }
-td:nth-child(2) { min-width: 360px; }
+td:nth-child(2) { min-width: 320px; }
 td:nth-child(3), td:nth-child(4) { white-space: nowrap; width: 90px; }
+td:nth-child(6) { min-width: 230px; }
 .task-status { display: inline-block; border-radius: 999px; padding: 5px 8px; white-space: nowrap; font-size: 10px; font-weight: 800; }
 .task-status--done { color: #267047; background: var(--green-soft); }
 .task-status--partial, .task-status--work { color: #1b5d95; background: var(--blue); }
 .task-status--not-started { color: #687684; background: var(--gray-soft); }
 .task-status--decision { color: #a34e16; background: var(--orange-soft); }
+.task-comment { display: block; color: #d9e7f4; min-width: 180px; }
+.task-comment--empty { color: #7890a5; }
 .budget-workbook-view { margin: 0; }
 .budget-workbook-frame { display: block; width: 100%; min-height: 860px; border: 1px solid #2b4b66; border-radius: 8px; background: #fff; }
 footer { width: min(1260px, calc(100% - 48px)); margin: 0 auto; border-top: 1px solid var(--line); padding: 18px 0 30px; color: var(--muted); display: flex; justify-content: space-between; gap: 20px; font-size: 11px; line-height: 1.4; }

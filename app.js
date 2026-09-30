@@ -49,6 +49,7 @@ let tasks = rawTasks.map(function (row) {
     title: cells[2],
     start: cells[3],
     due: cells[4],
+    comment: cells[6] || "",
     status: isOnOrBeforeReportDate(cells[4]) ? "Выполнено" : cells[5]
   };
 });
@@ -116,19 +117,23 @@ async function loadTasksFromSchedule() {
     const titleColumn = headers.indexOf("Задача");
     const startColumn = headers.indexOf("Начало");
     const dueColumn = headers.indexOf("Окончание / срок");
-    const noteColumn = headers.indexOf("Примечание");
+    const noteColumn = headers.findIndex(function (header) {
+      return header.toLowerCase().startsWith("примечание");
+    });
     const importedTasks = rows.slice(headerRow + 1)
       .filter(function (row) { return String(row[idColumn] || "").trim() && String(row[titleColumn] || "").trim(); })
       .map(function (row) {
         const id = String(row[idColumn]).trim().replace(/\.$/, "");
         const fallback = fallbackById.get(id);
+        const comment = noteColumn >= 0 ? String(row[noteColumn] || "").trim() : "";
         return {
           id: id,
           stream: fallback ? fallback.stream : "Не указано",
           title: String(row[titleColumn]).trim(),
           start: normalizeDate(row[startColumn]),
           due: normalizeDate(row[dueColumn]),
-          status: statusFromNote(noteColumn >= 0 ? row[noteColumn] : "", fallback && fallback.status)
+          comment: comment,
+          status: statusFromNote(comment, fallback && fallback.status)
         };
       });
     if (!importedTasks.length) throw new Error("В графике нет задач");
@@ -143,6 +148,12 @@ async function loadTasksFromSchedule() {
 
 function one(selector) {
   return document.querySelector(selector);
+}
+
+function escapeHtml(value) {
+  return String(value == null ? "" : value).replace(/[&<>"']/g, function (character) {
+    return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[character];
+  });
 }
 function countFor(status) {
   return tasks.filter(function (task) { return task.status === status; }).length;
@@ -205,7 +216,10 @@ function renderTaskTable() {
   });
   one("#visible-task-count").textContent = "Показано: " + filtered.length + " из " + tasks.length;
   one("#task-table-body").innerHTML = filtered.map(function (task) {
-      return '<tr><td>' + task.id + '</td><td>' + task.title + '</td><td>' + task.start + '</td><td>' + task.due + '</td><td><span class="task-status task-status--' + statusClass(task.status) + '">' + task.status + '</span></td></tr>';
+      const comment = task.comment
+        ? '<span class="task-comment">' + escapeHtml(task.comment) + '</span>'
+        : '<span class="task-comment task-comment--empty">—</span>';
+      return '<tr><td>' + escapeHtml(task.id) + '</td><td>' + escapeHtml(task.title) + '</td><td>' + escapeHtml(task.start) + '</td><td>' + escapeHtml(task.due) + '</td><td><span class="task-status task-status--' + statusClass(task.status) + '">' + escapeHtml(task.status) + '</span></td><td>' + comment + '</td></tr>';
   }).join("");
 }
 
