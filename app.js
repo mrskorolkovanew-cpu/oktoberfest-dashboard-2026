@@ -223,6 +223,40 @@ function renderTaskTable() {
   }).join("");
 }
 
+function taskDate(value) {
+  const match = String(value || "").match(/^(\d{2})\.(\d{2})\.(\d{4})$/);
+  if (!match) return null;
+  return new Date(Number(match[3]), Number(match[2]) - 1, Number(match[1]));
+}
+
+function renderFocus() {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const activeTasks = tasks
+    .filter(function (task) { return task.status !== "Выполнено"; })
+    .sort(function (left, right) {
+      const leftDate = taskDate(left.due);
+      const rightDate = taskDate(right.due);
+      return (leftDate ? leftDate.valueOf() : Number.MAX_SAFE_INTEGER) - (rightDate ? rightDate.valueOf() : Number.MAX_SAFE_INTEGER);
+    })
+    .slice(0, 6);
+
+  one("#focus-period").textContent = "на " + String(today.getDate()).padStart(2, "0") + "." + String(today.getMonth() + 1).padStart(2, "0") + "." + today.getFullYear();
+  one("#milestone-list").innerHTML = activeTasks.length
+    ? activeTasks.map(function (task) {
+        const dueDate = taskDate(task.due);
+        const overdue = dueDate && dueDate < today;
+        const comment = task.comment
+          ? '<p class="focus-comment"><strong>Комментарий:</strong> ' + escapeHtml(task.comment) + '</p>'
+          : "";
+        const datetime = dueDate
+          ? dueDate.getFullYear() + "-" + String(dueDate.getMonth() + 1).padStart(2, "0") + "-" + String(dueDate.getDate()).padStart(2, "0")
+          : "";
+        return '<li><time datetime="' + datetime + '">' + escapeHtml(task.due) + '</time><div><strong class="focus-title">' + escapeHtml(task.title) + '</strong><p class="focus-meta"><span class="focus-status' + (overdue ? ' focus-status--overdue' : '') + '">' + (overdue ? 'Срок прошёл' : escapeHtml(task.status)) + '</span></p>' + comment + '</div></li>';
+      }).join("")
+    : '<li class="focus-empty">Нет незавершённых задач в актуальном графике.</li>';
+}
+
 function showView(viewId) {
   document.querySelectorAll(".view-panel").forEach(function (panel) {
     panel.classList.toggle("is-active", panel.id === viewId);
@@ -247,6 +281,7 @@ one("#stream-filter").addEventListener("change", renderTaskTable);
 
 function renderDashboard() {
   renderProgress();
+  renderFocus();
   renderWorkstreams();
   renderFilters();
   renderTaskTable();

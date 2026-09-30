@@ -8,7 +8,7 @@
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23163a5f'/%3E%3Cpath d='M18 18h28v8H18zm3 11h22l-3 19H24z' fill='%23f4bb36'/%3E%3Cpath d='M26 35h12' stroke='%23163a5f' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E" />
     <title>Октоберфест 2026 — дашборд подготовки</title>
     <link rel="stylesheet" href="styles.css?v=20260923-5" />
-    <script defer src="app.js?v=20260930-2"></script>
+    <script defer src="app.js?v=20260930-3"></script>
   </head>
   <body>
     <div class="page-shell">
@@ -93,16 +93,9 @@
             <article class="panel milestones-panel">
               <div class="panel-heading">
                 <div><p class="section-label">Ближайшие контрольные точки</p><h2>Что держим в фокусе</h2></div>
-                <span class="calendar-badge">октябрь</span>
+                <span class="calendar-badge" id="focus-period">актуальный график</span>
               </div>
-              <ol class="milestone-list">
-                <li><time datetime="2026-09-25">25.09</time><span>Согласовать общий бюджет и заказ баннеров</span></li>
-                <li><time datetime="2026-09-28">28.09</time><span>Запуск рекламной кампании</span></li>
-                <li><time datetime="2026-10-01">01.10</time><span>Завершить изготовление и монтаж баннеров</span></li>
-                <li><time datetime="2026-10-10">10.10</time><span>Заключить договоры с DJ и техническими подрядчиками</span></li>
-                <li><time datetime="2026-10-15">15.10</time><span>Зафиксировать цены и материалы для мастер-классов</span></li>
-                <li><time datetime="2026-10-23">23.10</time><span>Открытие фестиваля</span></li>
-              </ol>
+              <ol class="milestone-list" id="milestone-list"></ol>
             </article>
           </div>
 
