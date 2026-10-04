@@ -7,8 +7,8 @@
     <meta name="theme-color" content="#163a5f" />
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23163a5f'/%3E%3Cpath d='M18 18h28v8H18zm3 11h22l-3 19H24z' fill='%23f4bb36'/%3E%3Cpath d='M26 35h12' stroke='%23163a5f' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E" />
     <title>Октоберфест 2026 — дашборд подготовки</title>
-    <link rel="stylesheet" href="styles.css?v=20260923-5" />
-    <script defer src="app.js?v=20260929-1"></script>
+    <link rel="stylesheet" href="styles.css?v=20261004-1" />
+    <script defer src="app.js?v=20261004-1"></script>
   </head>
   <body>
     <div class="page-shell">
@@ -22,7 +22,7 @@
         </a>
         <div class="topbar-meta">
           <span class="status-chip status-chip--work">План подготовки</span>
-          <time class="updated" datetime="2026-10-01">Обновлено 01.10.2026 · <span id="source-status">Загрузка графика…</span></time>
+          <time class="updated" datetime="2026-10-04">Обновлено 04.10.2026 · <span id="source-status">Загрузка графика…</span></time>
         </div>
       </header>
 
@@ -93,16 +93,9 @@
             <article class="panel milestones-panel">
               <div class="panel-heading">
                 <div><p class="section-label">Ближайшие контрольные точки</p><h2>Что держим в фокусе</h2></div>
-                <span class="calendar-badge">октябрь</span>
+                <span class="calendar-badge" id="focus-period">актуальный график</span>
               </div>
-              <ol class="milestone-list">
-                <li><time datetime="2026-09-25">25.09</time><span>Согласовать общий бюджет и заказ баннеров</span></li>
-                <li><time datetime="2026-09-28">28.09</time><span>Запуск рекламной кампании</span></li>
-                <li><time datetime="2026-10-01">01.10</time><span>Завершить изготовление и монтаж баннеров</span></li>
-                <li><time datetime="2026-10-10">10.10</time><span>Заключить договоры с DJ и техническими подрядчиками</span></li>
-                <li><time datetime="2026-10-15">15.10</time><span>Зафиксировать цены и материалы для мастер-классов</span></li>
-                <li><time datetime="2026-10-23">23.10</time><span>Открытие фестиваля</span></li>
-              </ol>
+              <ol class="milestone-list" id="milestone-list"></ol>
             </article>
           </div>
 
@@ -122,10 +115,10 @@
                 <span class="risk-count">4 точки</span>
               </div>
               <div class="risk-list">
-                <div class="risk-item risk-item--decision"><span class="risk-state">Решение</span><p><strong>Утепление лаунж-зоны</strong><br />Нужно отдельное управленческое решение.</p></div>
-                <div class="risk-item"><span class="risk-state">Контроль</span><p><strong>Бюджет и ценообразование</strong><br />Согласовать до 25.09, цены — до 15.10.</p></div>
-                <div class="risk-item"><span class="risk-state">Контроль</span><p><strong>Погодный сценарий и локации</strong><br />Часть решений по активности ещё требует фиксации.</p></div>
-                <div class="risk-item"><span class="risk-state">Контроль</span><p><strong>Подрядчики и поставки</strong><br />Ключевые договоры и финальные сверки — в октябре.</p></div>
+                <div class="risk-item"><span class="risk-state">Риск</span><p><strong>Погодные условия</strong><br />Требуются готовые сценарии для хорошей и плохой погоды.</p></div>
+                <div class="risk-item"><span class="risk-state">Риск</span><p><strong>Посещаемость</strong><br />Риск невыполнения плана по привлечению посетителей.</p></div>
+                <div class="risk-item"><span class="risk-state">Риск</span><p><strong>Поставки и партнёры</strong><br />Риск срыва поставок оборудования, продуктов и партнёрских соглашений.</p></div>
+                <div class="risk-item risk-item--decision"><span class="risk-state">Решение</span><p><strong>Разрешения</strong><br />Необходимо согласовать использование открытого огня.</p></div>
               </div>
             </article>
           </div>
@@ -143,7 +136,7 @@
           <iframe
             class="budget-workbook-frame"
             title="Бюджет Октоберфест"
-            src="https://view.officeapps.live.com/op/embed.aspx?src=https%3A%2F%2Fmrskorolkovanew-cpu.github.io%2Foktoberfest-dashboard-2026%2F%D0%91%D1%8E%D0%B4%D0%B6%D0%B5%D1%82%20%D0%9E%D0%BA%D1%82%D0%BE%D0%B1%D0%B5%D1%80%D1%84%D0%B5%D1%81%D1%82.xlsx%3Fv%3D20260929">
+            src="https://view.officeapps.live.com/op/embed.aspx?src=https%3A%2F%2Fmrskorolkovanew-cpu.github.io%2Foktoberfest-dashboard-2026%2F%D0%91%D1%8E%D0%B4%D0%B6%D0%B5%D1%82%20%D0%9E%D0%BA%D1%82%D0%BE%D0%B1%D0%B5%D1%80%D1%84%D0%B5%D1%81%D1%82.xlsx%3Fv%3D20261004">
           </iframe>
         </section>
 
@@ -151,7 +144,7 @@
           <div class="schedule-heading">
             <div>
               <p class="section-label">График подготовки</p><h2>Задачи и сроки</h2>
-              <p>Статусы сформированы по плану задач и брифу. Выберите статус или направление, чтобы сузить список.</p>
+              <p>Статусы и комментарии загружаются из актуального графика. Выберите статус или направление, чтобы сузить список.</p>
             </div>
             <button class="text-action" type="button" data-show-overview>← Вернуться к обзору</button>
           </div>
@@ -162,7 +155,7 @@
           </div>
           <div class="table-wrap">
             <table>
-              <thead><tr><th>№</th><th>Задача</th><th>Начало</th><th>Срок</th><th>Статус</th></tr></thead>
+              <thead><tr><th>№</th><th>Задача</th><th>Начало</th><th>Срок</th><th>Статус</th><th>Комментарий</th></tr></thead>
               <tbody id="task-table-body"></tbody>
             </table>
           </div>
@@ -237,7 +230,7 @@
 
       <footer>
         <span>Октоберфест 2026 · рабочий дашборд проекта</span>
-        <span>Источник: бюджет — версия 29.09.2026; план задач, программа и бриф — срез 23.09.2026</span>
+        <span>Источники: бюджет и график подготовки; программа — Приложение 1; бриф — версия 4.0; план задач — справочно</span>
       </footer>
     </div>
   </body>

@@ -49,12 +49,14 @@ let tasks = rawTasks.map(function (row) {
     title: cells[2],
     start: cells[3],
     due: cells[4],
+    comment: cells[6] || "",
     status: isOnOrBeforeReportDate(cells[4]) ? "Выполнено" : cells[5]
   };
 });
 
 const scheduleFile = "График_подготовки_Октоберфест.xlsx";
 const fallbackById = new Map(tasks.map(function (task) { return [String(task.id).replace(/\.$/, ""), task]; }));
+const fallbackByTitle = new Map(tasks.map(function (task) { return [normalizeTitle(task.title), task]; }));
 
 const statusMeta = {
   "Выполнено": { label: "Выполнено", color: "#3d8a61", css: "done" },
@@ -77,6 +79,35 @@ function normalizeDate(value) {
   const iso = text.match(/^(\d{4})-(\d{2})-(\d{2})/);
   if (iso) return iso[3] + "." + iso[2] + "." + iso[1];
   return text;
+}
+
+function normalizeTitle(value) {
+  return String(value || "")
+    .toLowerCase()
+    .replace(/ё/g, "е")
+    .replace(/[^a-zа-я0-9]+/gi, " ")
+    .trim();
+}
+
+function fallbackForTask(id, title) {
+  const byId = fallbackById.get(id);
+  const normalized = normalizeTitle(title);
+  if (byId && normalizeTitle(byId.title) === normalized) return byId;
+  if (fallbackByTitle.has(normalized)) return fallbackByTitle.get(normalized);
+
+  const titleTokens = new Set(normalized.split(" ").filter(Boolean));
+  let bestMatch = null;
+  let bestScore = 0;
+  tasks.forEach(function (task) {
+    const candidateTokens = new Set(normalizeTitle(task.title).split(" ").filter(Boolean));
+    const overlap = Array.from(titleTokens).filter(function (token) { return candidateTokens.has(token); }).length;
+    const score = overlap / Math.max(titleTokens.size, candidateTokens.size, 1);
+    if (score > bestScore) {
+      bestMatch = task;
+      bestScore = score;
+    }
+  });
+  return bestScore >= 0.5 ? bestMatch : null;
 }
 
 function statusFromNote(note, fallbackStatus) {
@@ -116,19 +147,24 @@ async function loadTasksFromSchedule() {
     const titleColumn = headers.indexOf("Задача");
     const startColumn = headers.indexOf("Начало");
     const dueColumn = headers.indexOf("Окончание / срок");
-    const noteColumn = headers.indexOf("Примечание");
+    const noteColumn = headers.findIndex(function (header) {
+      return header.toLowerCase().startsWith("примечание");
+    });
     const importedTasks = rows.slice(headerRow + 1)
       .filter(function (row) { return String(row[idColumn] || "").trim() && String(row[titleColumn] || "").trim(); })
       .map(function (row) {
         const id = String(row[idColumn]).trim().replace(/\.$/, "");
-        const fallback = fallbackById.get(id);
+        const title = String(row[titleColumn]).trim();
+        const fallback = fallbackForTask(id, title);
+        const comment = noteColumn >= 0 ? String(row[noteColumn] || "").trim() : "";
         return {
           id: id,
           stream: fallback ? fallback.stream : "Не указано",
-          title: String(row[titleColumn]).trim(),
+          title: title,
           start: normalizeDate(row[startColumn]),
           due: normalizeDate(row[dueColumn]),
-          status: statusFromNote(noteColumn >= 0 ? row[noteColumn] : "", fallback && fallback.status)
+          comment: comment,
+          status: statusFromNote(comment, fallback && fallback.status)
         };
       });
     if (!importedTasks.length) throw new Error("В графике нет задач");
@@ -143,6 +179,12 @@ async function loadTasksFromSchedule() {
 
 function one(selector) {
   return document.querySelector(selector);
+}
+
+function escapeHtml(value) {
+  return String(value == null ? "" : value).replace(/[&<>"']/g, function (character) {
+    return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[character];
+  });
 }
 function countFor(status) {
   return tasks.filter(function (task) { return task.status === status; }).length;
@@ -205,8 +247,46 @@ function renderTaskTable() {
   });
   one("#visible-task-count").textContent = "Показано: " + filtered.length + " из " + tasks.length;
   one("#task-table-body").innerHTML = filtered.map(function (task) {
-      return '<tr><td>' + task.id + '</td><td>' + task.title + '</td><td>' + task.start + '</td><td>' + task.due + '</td><td><span class="task-status task-status--' + statusClass(task.status) + '">' + task.status + '</span></td></tr>';
+      const comment = task.comment
+        ? '<span class="task-comment">' + escapeHtml(task.comment) + '</span>'
+        : '<span class="task-comment task-comment--empty">—</span>';
+      return '<tr><td>' + escapeHtml(task.id) + '</td><td>' + escapeHtml(task.title) + '</td><td>' + escapeHtml(task.start) + '</td><td>' + escapeHtml(task.due) + '</td><td><span class="task-status task-status--' + statusClass(task.status) + '">' + escapeHtml(task.status) + '</span></td><td>' + comment + '</td></tr>';
   }).join("");
+}
+
+function taskDate(value) {
+  const match = String(value || "").match(/^(\d{2})\.(\d{2})\.(\d{4})$/);
+  if (!match) return null;
+  return new Date(Number(match[3]), Number(match[2]) - 1, Number(match[1]));
+}
+
+function renderFocus() {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const activeTasks = tasks
+    .filter(function (task) { return task.status !== "Выполнено"; })
+    .sort(function (left, right) {
+      const leftDate = taskDate(left.due);
+      const rightDate = taskDate(right.due);
+      return (leftDate ? leftDate.valueOf() : Number.MAX_SAFE_INTEGER) - (rightDate ? rightDate.valueOf() : Number.MAX_SAFE_INTEGER);
+    })
+    .slice(0, 6);
+
+  one("#focus-period").textContent = "на " + String(today.getDate()).padStart(2, "0") + "." + String(today.getMonth() + 1).padStart(2, "0") + "." + today.getFullYear();
+  one("#milestone-list").innerHTML = activeTasks.length
+    ? activeTasks.map(function (task) {
+        const dueDate = taskDate(task.due);
+        const overdue = dueDate && dueDate < today;
+        const comment = task.comment
+          ? '<p class="focus-comment"><strong>Комментарий:</strong> ' + escapeHtml(task.comment) + '</p>'
+          : "";
+        const datetime = dueDate
+          ? dueDate.getFullYear() + "-" + String(dueDate.getMonth() + 1).padStart(2, "0") + "-" + String(dueDate.getDate()).padStart(2, "0")
+          : "";
+        const statusLabel = overdue ? "Срок прошёл · " + task.status : task.status;
+        return '<li><time datetime="' + datetime + '">' + escapeHtml(task.due) + '</time><div><strong class="focus-title">' + escapeHtml(task.title) + '</strong><p class="focus-meta"><span class="focus-status' + (overdue ? " focus-status--overdue" : "") + '">' + escapeHtml(statusLabel) + "</span></p>" + comment + "</div></li>";
+      }).join("")
+    : '<li class="focus-empty">Нет незавершённых задач в актуальном графике.</li>';
 }
 
 function showView(viewId) {
@@ -233,6 +313,7 @@ one("#stream-filter").addEventListener("change", renderTaskTable);
 
 function renderDashboard() {
   renderProgress();
+  renderFocus();
   renderWorkstreams();
   renderFilters();
   renderTaskTable();
