@@ -63,9 +63,10 @@ const statusMeta = {
   "Частично выполнено": { label: "В работе и частично", color: "#5b9bd5", css: "partial" },
   "В работе": { label: "В работе", color: "#5b9bd5", css: "work" },
   "Не начато": { label: "Не начато", color: "#b8c2cc", css: "not-started" },
+  "Не указан": { label: "Не указан", color: "#8796a5", css: "unspecified" },
   "Ожидает решения": { label: "Ожидает решения", color: "#d87932", css: "decision" }
 };
-const statusOrder = ["Выполнено", "В работе", "Частично выполнено", "Не начато", "Ожидает решения"];
+const statusOrder = ["Выполнено", "В работе", "Частично выполнено", "Не начато", "Не указан", "Ожидает решения"];
 
 function normalizeDate(value) {
   if (typeof value === "number" && window.XLSX) {
@@ -78,6 +79,11 @@ function normalizeDate(value) {
   const text = String(value || "").trim();
   const iso = text.match(/^(\d{4})-(\d{2})-(\d{2})/);
   if (iso) return iso[3] + "." + iso[2] + "." + iso[1];
+  const dmy = text.match(/^(\d{1,2})\.(\d{1,2})\.(\d{2,4})\.?$/);
+  if (dmy) {
+    const year = dmy[3].length === 2 ? "20" + dmy[3] : dmy[3];
+    return dmy[1].padStart(2, "0") + "." + dmy[2].padStart(2, "0") + "." + year;
+  }
   return text;
 }
 
@@ -116,7 +122,7 @@ function statusFromNote(note, fallbackStatus) {
   if (value.includes("выполнено") && !value.includes("не выполнено")) return "Выполнено";
   if (value.includes("принято решение")) return "Выполнено";
   if (value.includes("изготовлено")) return "Частично выполнено";
-  return fallbackStatus || "Не начато";
+  return fallbackStatus || "Не указан";
 }
 
 function loadSpreadsheetLibrary() {
@@ -211,6 +217,7 @@ function renderProgress() {
     { label: "Выполнено", count: completed, color: "#3d8a61" },
     { label: "В работе и частично", count: countFor("В работе") + countFor("Частично выполнено"), color: "#5b9bd5" },
     { label: "Не начато", count: countFor("Не начато"), color: "#b8c2cc" },
+    { label: "Не указан", count: countFor("Не указан"), color: "#8796a5" },
     { label: "Ожидает решения", count: countFor("Ожидает решения"), color: "#d87932" }
   ];
   one("#status-list").innerHTML = compact.map(function (item) {

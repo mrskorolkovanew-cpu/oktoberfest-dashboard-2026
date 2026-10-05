@@ -173,6 +173,7 @@ td:nth-child(6) { min-width: 230px; }
 .task-status--done { color: #267047; background: var(--green-soft); }
 .task-status--partial, .task-status--work { color: #1b5d95; background: var(--blue); }
 .task-status--not-started { color: #687684; background: var(--gray-soft); }
+.task-status--unspecified { color: #687684; background: var(--gray-soft); }
 .task-status--decision { color: #a34e16; background: var(--orange-soft); }
 .task-comment { display: block; color: #d9e7f4; min-width: 180px; }
 .task-comment--empty { color: #7890a5; }
