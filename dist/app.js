@@ -122,6 +122,7 @@ function statusFromNote(note, fallbackStatus) {
   if (value.includes("выполнено") && !value.includes("не выполнено")) return "Выполнено";
   if (value.includes("принято решение")) return "Выполнено";
   if (value.includes("изготовлено")) return "Частично выполнено";
+  if (value.includes("в процессе согласования") || value.includes("ожидается договор") || value.includes("заказ оформлен")) return "В работе";
   return fallbackStatus || "Не указан";
 }
 
@@ -316,7 +317,8 @@ function filterTiming() {
   const day = one('#timing-day').value;
   const location = one('#timing-location').value;
   let visible = 0;
-  document.querySelectorAll('.timing-event').forEach(function (row) {
+  const events = document.querySelectorAll('.timing-event');
+  events.forEach(function (row) {
     const matches = (day === 'all' || row.dataset.days.split(' ').includes(day)) &&
       (location === 'all' || row.dataset.location === location);
     row.hidden = !matches;
@@ -335,7 +337,7 @@ function filterTiming() {
     group.hidden = !hasVisibleEvents;
     group.querySelector('th').colSpan = day === 'all' ? 6 : 4;
   });
-  one('#timing-count').textContent = 'Показано: ' + visible + ' из 18 строк';
+  one('#timing-count').textContent = 'Показано: ' + visible + ' из ' + events.length + ' строк';
   one('#timing-empty').hidden = visible !== 0;
 }
 one('#timing-day').addEventListener('change', filterTiming);
