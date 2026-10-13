@@ -297,12 +297,16 @@ function renderFocus() {
 }
 
 function showView(viewId) {
+  if (!Array.from(document.querySelectorAll('.view-panel')).some(function (panel) { return panel.id === viewId; })) return;
   document.querySelectorAll(".view-panel").forEach(function (panel) {
     panel.classList.toggle("is-active", panel.id === viewId);
   });
   document.querySelectorAll(".view-tab").forEach(function (tab) {
     tab.classList.toggle("is-active", tab.dataset.viewTarget === viewId);
+    if (tab.dataset.viewTarget === viewId) tab.setAttribute('aria-current', 'page');
+    else tab.removeAttribute('aria-current');
   });
+  history.replaceState(null, '', '#' + viewId);
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
@@ -317,6 +321,38 @@ document.querySelectorAll("[data-show-overview]").forEach(function (button) {
 });
 one("#status-filter").addEventListener("change", renderTaskTable);
 one("#stream-filter").addEventListener("change", renderTaskTable);
+
+function filterTiming() {
+  const day = one('#timing-day').value;
+  const location = one('#timing-location').value;
+  let visible = 0;
+  document.querySelectorAll('.timing-event').forEach(function (row) {
+    const matches = (day === 'all' || row.dataset.days.split(' ').includes(day)) &&
+      (location === 'all' || row.dataset.location === location);
+    row.hidden = !matches;
+    if (matches) visible += 1;
+  });
+  document.querySelectorAll('[data-timing-day]').forEach(function (cell) {
+    cell.hidden = day !== 'all' && cell.dataset.timingDay !== day;
+  });
+  document.querySelectorAll('.timing-group').forEach(function (group) {
+    let row = group.nextElementSibling;
+    let hasVisibleEvents = false;
+    while (row && !row.classList.contains('timing-group')) {
+      if (!row.hidden) hasVisibleEvents = true;
+      row = row.nextElementSibling;
+    }
+    group.hidden = !hasVisibleEvents;
+    group.querySelector('th').colSpan = day === 'all' ? 6 : 4;
+  });
+  one('#timing-count').textContent = 'Показано: ' + visible + ' из 18 строк';
+  one('#timing-empty').hidden = visible !== 0;
+}
+one('#timing-day').addEventListener('change', filterTiming);
+one('#timing-location').addEventListener('change', filterTiming);
+filterTiming();
+if (location.hash) showView(location.hash.slice(1));
+window.addEventListener('hashchange', function () { showView(location.hash.slice(1)); });
 
 function renderDashboard() {
   renderProgress();

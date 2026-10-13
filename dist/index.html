@@ -7,8 +7,8 @@
     <meta name="theme-color" content="#163a5f" />
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23163a5f'/%3E%3Cpath d='M18 18h28v8H18zm3 11h22l-3 19H24z' fill='%23f4bb36'/%3E%3Cpath d='M26 35h12' stroke='%23163a5f' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E" />
     <title>Октоберфест 2026 — дашборд подготовки</title>
-    <link rel="stylesheet" href="styles.css?v=20261004-1" />
-    <script defer src="app.js?v=20261004-1"></script>
+    <link rel="stylesheet" href="styles.css?v=20261013-timing-1" />
+    <script defer src="app.js?v=20261013-timing-1"></script>
   </head>
   <body>
     <div class="page-shell">
@@ -31,9 +31,9 @@
           <article class="hero-budget" aria-label="Плановые показатели бюджета">
             <span>Бюджет</span>
             <dl class="hero-budget-list">
-              <div><dt>Планируемые затраты</dt><dd>5 128 328,09 ₽</dd></div>
+              <div><dt>Планируемые затраты</dt><dd>5 123 008,94 ₽</dd></div>
               <div><dt>Планируемый доход</dt><dd>12 500 000,00 ₽</dd></div>
-              <div><dt>Планируемая прибыль</dt><dd>7 371 671,91 ₽</dd></div>
+              <div><dt>Планируемая прибыль</dt><dd>7 376 991,06 ₽</dd></div>
             </dl>
             <small class="hero-budget-status">Не утверждён · бюджет сформирован, детальное ценообразование в разработке</small>
           </article>
@@ -48,14 +48,14 @@
               <ul class="location-list">
                 <li><strong>Фуд:</strong> парк и сцена; при плохой погоде — район Лофта и Лофт</li>
                 <li><strong>Фудовый МК:</strong> шатёр около Альпак; при плохой погоде — район Лофта</li>
-                <li><strong>Детские МК:</strong> площадь перед сценой</li>
-                <li><strong>Интерактивы:</strong> аллея у Блинной, Кофе Джой, фуд-корт у верёвочного парка, шатёр Нитро</li>
-                <li><strong>Ведущий и DJ:</strong> сцена; при плохой погоде — сцена Лофта</li>
+                <li><strong>Детские МК:</strong> площадь перед сценой; в плане осталось уточнение</li>
+                <li><strong>Интерактивы:</strong> аллея у Блинной, Кофе Джой, фуд-корт у верёвочного парка; шатёр Нитро — вариант</li>
+                <li><strong>Ведущий и DJ:</strong> сцена. При плохой погоде ведущий — на сцене Лофта</li>
                 <li><strong>Спорт-бар:</strong> Лофт</li>
               </ul>
             </article>
             <article class="hero-detail">
-              <p class="section-label">Ориентировочный тайминг</p>
+              <p class="section-label">Часы фестиваля</p>
               <dl class="day-timing">
                 <div><dt>23.10</dt><dd>16:00–22:00 · открытие и вечерняя программа</dd></div>
                 <div><dt>24.10</dt><dd>10:00–22:00 · полный фестивальный день</dd></div>
@@ -69,6 +69,7 @@
           <button class="view-tab is-active" type="button" data-view-target="overview-panel">Обзор</button>
           <button class="view-tab" type="button" data-view-target="schedule-panel">График задач <span id="task-total"></span></button>
           <button class="view-tab" type="button" data-view-target="program-panel">Программа мероприятий</button>
+          <button class="view-tab" type="button" data-view-target="timing-panel">Тайминг</button>
           <button class="view-tab" type="button" data-view-target="budget-panel">Бюджет</button>
         </nav>
 
@@ -113,17 +114,27 @@
             <article class="panel risks-panel">
               <div class="panel-heading">
                 <div><p class="section-label">Риски и вопросы</p><h2>Требуют внимания</h2></div>
-                <span class="risk-count">5 точек</span>
+                <span class="risk-count">6 точек</span>
               </div>
               <div class="risk-list">
                 <div class="risk-item"><span class="risk-state">Риск</span><p><strong>Погодные условия</strong><br />Требуются готовые сценарии для хорошей и плохой погоды.</p></div>
                 <div class="risk-item"><span class="risk-state">Риск</span><p><strong>Посещаемость</strong><br />Риск невыполнения плана по привлечению посетителей.</p></div>
                 <div class="risk-item"><span class="risk-state">Риск</span><p><strong>Поставки и партнёры</strong><br />Риск срыва поставок оборудования, продуктов и партнёрских соглашений.</p></div>
                 <div class="risk-item"><span class="risk-state">Риск</span><p><strong>Разрешения</strong><br />Риск отсутствия необходимых разрешений, включая согласование использования открытого огня.</p></div>
-                <div class="risk-item risk-item--decision"><span class="risk-state">Требует решения</span><p><strong>Бюджет и костюмы</strong><br />Уточняется стоимость проката тематических костюмов; требуется оптимизация затрат на звуковое оборудование и прокат костюмов.</p></div>
+                <div class="risk-item"><span class="risk-state">Риск</span><p><strong>Безопасность</strong><br />Инциденты при проведении фестиваля. Отсутствие инцидентов — критерий успеха в брифе.</p></div>
+                <div class="risk-item risk-item--decision"><span class="risk-state">Требует решения</span><p><strong>Утверждение бюджета</strong><br />Бюджет сформирован, но не утверждён. Детальное ценообразование разрабатывается. Стоимость костюмов и оформления определена.</p></div>
               </div>
             </article>
           </div>
+
+          <section class="panel workstreams-panel" aria-labelledby="brief-status-heading">
+            <div class="panel-heading"><div><p class="section-label">Обновлённый бриф · версия 5.0</p><h2 id="brief-status-heading">Что подготовлено</h2></div></div>
+            <div class="program-library program-library--three">
+              <article class="program-content-card"><h3>Программа и площадки</h3><p>Разработаны детальная программа, тайминг и купонная система. Утверждены часы фестиваля и погодные сценарии. Подготовлен тематический плейлист.</p></article>
+              <article class="program-content-card"><h3>Продвижение</h3><p>Разработано предложение для сотрудничества с блогерами. По плану задач реклама запущена, баннеры заказаны и смонтированы.</p></article>
+              <article class="program-content-card"><h3>Ресурсы и бюджет</h3><p>Определена стоимость покупки костюмов ведущему и аниматорам, формат и стоимость оформления. Общие график и бюджет разработаны; утверждение бюджета ещё требуется.</p></article>
+            </div>
+          </section>
 
           <section class="panel workstreams-panel">
             <div class="panel-heading">
@@ -134,11 +145,62 @@
           </section>
         </section>
 
+        <section id="timing-panel" class="view-panel" aria-labelledby="timing-heading">
+          <div class="schedule-heading">
+            <div><p class="section-label">23–25 октября 2026 · московское время</p><h2 id="timing-heading">Тайминг по дням и локациям</h2>
+              <p>Каждое мероприятие — отдельной строкой. Совпадающие интервалы показывают параллельные активности.</p></div>
+            <a class="text-action" href="Октоберфест_тайминг_по_дням_2026-10-23_25.xlsx" download>Скачать тайминг Excel</a>
+          </div>
+          <div class="filters" aria-label="Фильтры тайминга">
+            <label>День<select id="timing-day"><option value="all">Все три дня</option><option value="0">23 октября · пятница</option><option value="1">24 октября · суббота</option><option value="2">25 октября · воскресенье</option></select></label>
+            <label>Локация<select id="timing-location"><option value="all">Все локации</option><option value="0">Площадь перед сценой*</option><option value="1">Аллея напротив Блинной</option><option value="2">Напротив цепочной карусели, у «Кофе Джой»</option><option value="3">Фуд-корт у верёвочного парка</option><option value="4">Один из шатров «Нитро»*</option><option value="5">Сцена</option><option value="6">Шатёр около Альпак; при плохой погоде — район Лофта</option><option value="7">Лофт</option></select></label>
+            <p id="timing-count" aria-live="polite">Показано: 18 из 18 строк</p>
+          </div>
+          <p id="timing-legend" class="program-note">¹ — часы общего блока или работы площадки. Отдельные конкурсы ведущего идут внутри блока; точные старты не заданы. «—» — на этот день мероприятие не указано.</p>
+          <div class="table-wrap timing-scroll" tabindex="0" role="region" aria-label="Тайминг: таблица с горизонтальной прокруткой">
+            <table class="timing-table" aria-describedby="timing-legend"><caption class="visually-hidden">Мероприятия и локации на 23, 24 и 25 октября 2026</caption>
+              <thead><tr><th scope="col">Мероприятие / активность</th><th scope="col">Локация</th><th scope="col" data-timing-day="0">23.10 · Пятница<small>16:00–22:00</small></th><th scope="col" data-timing-day="1">24.10 · Суббота<small>10:00–22:00</small></th><th scope="col" data-timing-day="2">25.10 · Воскресенье<small>10:00–22:00</small></th><th scope="col">Длительность / пояснение</th></tr></thead>
+              <tbody><tr class="timing-group"><th colspan="6" scope="rowgroup">ДЕТСКИЕ МК</th></tr>
+<tr class="timing-event" data-source-row="10" data-location="0" data-days="1 2"><th scope="row">«Крендель-мастерская»<br>Лепка из солёного теста</th><td class="timing-location">Площадь перед сценой*</td><td class="timing-time" data-timing-day="0"><span class="timing-absent" aria-label="В этот день не указано">—</span></td><td class="timing-time" data-timing-day="1">11:00–14:00<sup title="Границы общего блока">¹</sup></td><td class="timing-time" data-timing-day="2">11:00–14:00<sup title="Границы общего блока">¹</sup></td><td class="timing-detail">Цикл 20–25 минут. 11:00–14:00¹ — окно детских МК; старт отдельного занятия не задан.</td></tr>
+<tr class="timing-event" data-source-row="11" data-location="0" data-days="1 2"><th scope="row">«Осенний гербарий»<br>Открытки из сухоцветов</th><td class="timing-location">Площадь перед сценой*</td><td class="timing-time" data-timing-day="0"><span class="timing-absent" aria-label="В этот день не указано">—</span></td><td class="timing-time" data-timing-day="1">11:00–14:00<sup title="Границы общего блока">¹</sup></td><td class="timing-time" data-timing-day="2">11:00–14:00<sup title="Границы общего блока">¹</sup></td><td class="timing-detail">Цикл 15–20 минут. 11:00–14:00¹ — окно детских МК; старт отдельного занятия не задан.</td></tr>
+<tr class="timing-event" data-source-row="12" data-location="0" data-days="1 2"><th scope="row">«Музыкальная шкатулка»<br>Шумовые инструменты</th><td class="timing-location">Площадь перед сценой*</td><td class="timing-time" data-timing-day="0"><span class="timing-absent" aria-label="В этот день не указано">—</span></td><td class="timing-time" data-timing-day="1">11:00–14:00<sup title="Границы общего блока">¹</sup></td><td class="timing-time" data-timing-day="2">11:00–14:00<sup title="Границы общего блока">¹</sup></td><td class="timing-detail">Цикл 20 минут. 11:00–14:00¹ — окно детских МК; старт отдельного занятия не задан.</td></tr>
+<tr class="timing-event" data-source-row="13" data-location="0" data-days="1 2"><th scope="row">«Пряничная подкова»<br>Роспись пряников</th><td class="timing-location">Площадь перед сценой*</td><td class="timing-time" data-timing-day="0"><span class="timing-absent" aria-label="В этот день не указано">—</span></td><td class="timing-time" data-timing-day="1">11:00–14:00<sup title="Границы общего блока">¹</sup></td><td class="timing-time" data-timing-day="2">11:00–14:00<sup title="Границы общего блока">¹</sup></td><td class="timing-detail">Цикл 20 минут, до 10–12 детей одновременно. Старт отдельного занятия не задан.</td></tr>
+<tr class="timing-group"><th colspan="6" scope="rowgroup">ИНТЕРАКТИВЫ В ПАРКЕ — площадки работают параллельно</th></tr>
+<tr class="timing-event" data-source-row="15" data-location="1" data-days="0 1 2"><th scope="row">Гонки с кружками</th><td class="timing-location">Аллея напротив Блинной</td><td class="timing-time" data-timing-day="0">16:00–19:00</td><td class="timing-time" data-timing-day="1">14:00–19:00</td><td class="timing-time" data-timing-day="2">14:00–19:00</td><td class="timing-detail">Станция работает параллельно с остальными интерактивами парка.</td></tr>
+<tr class="timing-event" data-source-row="16" data-location="2" data-days="0 1 2"><th scope="row">Угадай сорт пива</th><td class="timing-location">Напротив цепочной карусели,<br>у «Кофе Джой»</td><td class="timing-time" data-timing-day="0">16:00–19:00</td><td class="timing-time" data-timing-day="1">14:00–19:00</td><td class="timing-time" data-timing-day="2">14:00–19:00</td><td class="timing-detail">Станция работает параллельно с остальными интерактивами парка.</td></tr>
+<tr class="timing-event" data-source-row="17" data-location="3" data-days="0 1 2"><th scope="row">Метание брецеля</th><td class="timing-location">Фуд-корт у верёвочного парка</td><td class="timing-time" data-timing-day="0">16:00–19:00</td><td class="timing-time" data-timing-day="1">14:00–19:00</td><td class="timing-time" data-timing-day="2">14:00–19:00</td><td class="timing-detail">Станция работает параллельно с остальными интерактивами парка.</td></tr>
+<tr class="timing-event" data-source-row="18" data-location="4" data-days="0 1 2"><th scope="row">Бирпонг</th><td class="timing-location">Один из шатров «Нитро»*</td><td class="timing-time" data-timing-day="0">16:00–19:00</td><td class="timing-time" data-timing-day="1">14:00–19:00</td><td class="timing-time" data-timing-day="2">14:00–19:00</td><td class="timing-detail">Место предложено как вариант: «в идеале один из шатров Нитро».</td></tr>
+<tr class="timing-group"><th colspan="6" scope="rowgroup">КОНКУРСЫ ВЕДУЩЕГО — Точное время каждого конкурса не задано.</th></tr>
+<tr class="timing-event" data-source-row="20" data-location="5" data-days="0 1 2"><th scope="row">«Громовой удар»</th><td class="timing-location">Сцена</td><td class="timing-time" data-timing-day="0">16:00–19:00<sup title="Границы общего блока">¹</sup></td><td class="timing-time" data-timing-day="1">14:00–18:00<sup title="Границы общего блока">¹</sup></td><td class="timing-time" data-timing-day="2">14:00–18:00<sup title="Границы общего блока">¹</sup></td><td class="timing-detail">Блок ведущего¹: пт 16:00–19:00, сб–вс 14:00–18:00. В выходные — выходы по 30–45 мин каждый час. Старт конкурса не задан.</td></tr>
+<tr class="timing-event" data-source-row="21" data-location="5" data-days="0 1 2"><th scope="row">«Держи кружку»</th><td class="timing-location">Сцена</td><td class="timing-time" data-timing-day="0">16:00–19:00<sup title="Границы общего блока">¹</sup></td><td class="timing-time" data-timing-day="1">14:00–18:00<sup title="Границы общего блока">¹</sup></td><td class="timing-time" data-timing-day="2">14:00–18:00<sup title="Границы общего блока">¹</sup></td><td class="timing-detail">Блок ведущего¹: пт 16:00–19:00, сб–вс 14:00–18:00. В выходные — выходы по 30–45 мин каждый час. Старт конкурса не задан.</td></tr>
+<tr class="timing-event" data-source-row="22" data-location="5" data-days="0 1 2"><th scope="row">Поедание сосисок</th><td class="timing-location">Сцена</td><td class="timing-time" data-timing-day="0">16:00–19:00<sup title="Границы общего блока">¹</sup></td><td class="timing-time" data-timing-day="1">14:00–18:00<sup title="Границы общего блока">¹</sup></td><td class="timing-time" data-timing-day="2">14:00–18:00<sup title="Границы общего блока">¹</sup></td><td class="timing-detail">Конкурс — 2–3 минуты. Блок ведущего¹: пт 16:00–19:00, сб–вс 14:00–18:00. Точный старт конкурса не задан.</td></tr>
+<tr class="timing-event" data-source-row="23" data-location="5" data-days="0 1 2"><th scope="row">Викторина по Октоберфесту</th><td class="timing-location">Сцена</td><td class="timing-time" data-timing-day="0">16:00–19:00<sup title="Границы общего блока">¹</sup></td><td class="timing-time" data-timing-day="1">14:00–18:00<sup title="Границы общего блока">¹</sup></td><td class="timing-time" data-timing-day="2">14:00–18:00<sup title="Границы общего блока">¹</sup></td><td class="timing-detail">5–7 вопросов. Блок ведущего¹: пт 16:00–19:00, сб–вс 14:00–18:00. Длительность и старт викторины не заданы.</td></tr>
+<tr class="timing-group"><th colspan="6" scope="rowgroup">ФУД — подача «Сказочной рульки» по сигналу ведущего</th></tr>
+<tr class="timing-event" data-source-row="25" data-location="5" data-days="0 1 2"><th scope="row">«Сказочная рулька»<br>Пятница / первая подача в выходные</th><td class="timing-location">Сцена</td><td class="timing-time" data-timing-day="0">17:00–19:00</td><td class="timing-time" data-timing-day="1">13:00–15:00</td><td class="timing-time" data-timing-day="2">13:00–15:00</td><td class="timing-detail">В пятницу одна подача. В субботу и воскресенье 2 раза по два часа по сигналу ведущего.</td></tr>
+<tr class="timing-event" data-source-row="26" data-location="5" data-days="1 2"><th scope="row">«Сказочная рулька»<br>Вторая подача в выходные</th><td class="timing-location">Сцена</td><td class="timing-time" data-timing-day="0"><span class="timing-absent" aria-label="В этот день не указано">—</span></td><td class="timing-time" data-timing-day="1">18:00–20:00</td><td class="timing-time" data-timing-day="2">18:00–20:00</td><td class="timing-detail">В пятницу одна подача. В субботу и воскресенье 2 раза по два часа по сигналу ведущего.</td></tr>
+<tr class="timing-event" data-source-row="27" data-location="6" data-days="0 1 2"><th scope="row">Фудовый МК «Брецели»</th><td class="timing-location">Шатёр около Альпак;<br>при плохой погоде — район Лофта</td><td class="timing-time" data-timing-day="0">16:00–22:00<sup title="Границы общего блока">¹</sup></td><td class="timing-time" data-timing-day="1">10:00–22:00<sup title="Границы общего блока">¹</sup></td><td class="timing-time" data-timing-day="2">10:00–22:00<sup title="Границы общего блока">¹</sup></td><td class="timing-detail">Указаны часы работы площадки¹. По плану МК проходят каждые 1,5–2 часа. Продолжительность одного занятия не указана.</td></tr>
+<tr class="timing-group"><th colspan="6" scope="rowgroup">МУЗЫКА И ТРАНСЛЯЦИИ</th></tr>
+<tr class="timing-event" data-source-row="29" data-location="5" data-days="1"><th scope="row">Диджей-сет</th><td class="timing-location">Сцена</td><td class="timing-time" data-timing-day="0"><span class="timing-absent" aria-label="В этот день не указано">—</span></td><td class="timing-time" data-timing-day="1">19:00–21:00</td><td class="timing-time" data-timing-day="2"><span class="timing-absent" aria-label="В этот день не указано">—</span></td><td class="timing-detail">Суббота, 19:00–21:00 (2 часа).</td></tr>
+<tr class="timing-event" data-source-row="30" data-location="7" data-days="2"><th scope="row">ЦСКА — Спартак<br>Спорт-бар, формат 18+</th><td class="timing-location">Лофт</td><td class="timing-time" data-timing-day="0"><span class="timing-absent" aria-label="В этот день не указано">—</span></td><td class="timing-time" data-timing-day="1"><span class="timing-absent" aria-label="В этот день не указано">—</span></td><td class="timing-time" data-timing-day="2">16:00–18:00</td><td class="timing-detail">По таймингу программы: 16:00–18:00.</td></tr>
+<tr class="timing-event" data-source-row="31" data-location="7" data-days="2"><th scope="row">Барселона — Реал Мадрид<br>Возможная трансляция</th><td class="timing-location">Лофт</td><td class="timing-time" data-timing-day="0"><span class="timing-absent" aria-label="В этот день не указано">—</span></td><td class="timing-time" data-timing-day="1"><span class="timing-absent" aria-label="В этот день не указано">—</span></td><td class="timing-time" data-timing-day="2">23:00–01:00<small>до 26.10 · условно</small></td><td class="timing-detail">Проведение условное: «если будет смысл в этом, то запустим». После закрытия фестиваля в 22:00.</td></tr></tbody>
+            </table>
+          </div>
+          <p id="timing-empty" class="program-note" hidden>На выбранный день и локацию мероприятия не указаны. Измените фильтры.</p>
+          <ul class="timing-notes"><li>* Детские МК: в строке 18 плана и приложении названа площадь перед сценой; в строках 4 и 11 плана осталось «уточняется».</li><li>* Бирпонг: в плане и программе локация сформулирована как вариант — «в идеале один из шатров Нитро».</li><li>Плохая погода: ведущий — сцена Лофта; интерактивы — у Лофта либо внутри.</li></ul>
+          <p class="panel-note">Источник: «Октоберфест_тайминг_по_дням_2026-10-23_25.xlsx», актуальная версия Nextcloud от 13.10.2026. В ней учтены уточнения ведущего, DJ и фудовой программы.</p>
+        </section>
+
         <section id="budget-panel" class="view-panel budget-workbook-view">
+          <div class="schedule-heading"><div><p class="section-label">Плановый бюджет · версия 13.10.2026</p><h2>Бюджет фестиваля</h2><p>Доход 12 500 000,00 ₽ · затраты 5 123 008,94 ₽ · прибыль 7 376 991,06 ₽. Бюджет не утверждён.</p></div><a class="text-action" href="Бюджет Октоберфест.xlsx" download>Скачать бюджет Excel</a></div>
+          <details class="program-note source-discrepancy"><summary>Расхождения бюджета и программы для проверки</summary>
+            <ul class="program-facts"><li>В бюджете ведущий рассчитан на 13 часов, в тайминге — 11 часов (3 + 4 + 4). Требуется сверить объём оплачиваемой работы.</li>
+            <li>Формула итоговых затрат F22 не включает отдельные строки F25 (купоны и билеты — 9 200 ₽), F39 (костюмы — 15 000 ₽) и F40 (декор — 59 000 ₽). Суммарно 83 200 ₽; учтены ли они в других статьях, из файла не следует. Показатели дашборда сохранены по исходной формуле.</li></ul>
+          </details>
+
           <iframe
             class="budget-workbook-frame"
             title="Бюджет Октоберфест"
-            src="https://view.officeapps.live.com/op/embed.aspx?src=https%3A%2F%2Fmrskorolkovanew-cpu.github.io%2Foktoberfest-dashboard-2026%2F%D0%91%D1%8E%D0%B4%D0%B6%D0%B5%D1%82%20%D0%9E%D0%BA%D1%82%D0%BE%D0%B1%D0%B5%D1%80%D1%84%D0%B5%D1%81%D1%82.xlsx%3Fv%3D20261012-1704">
+            src="https://view.officeapps.live.com/op/embed.aspx?src=https%3A%2F%2Fmrskorolkovanew-cpu.github.io%2Foktoberfest-dashboard-2026%2F%D0%91%D1%8E%D0%B4%D0%B6%D0%B5%D1%82%20%D0%9E%D0%BA%D1%82%D0%BE%D0%B1%D0%B5%D1%80%D1%84%D0%B5%D1%81%D1%82.xlsx%3Fv%3D20261013-budget-da993118">
           </iframe>
         </section>
 
@@ -167,7 +229,7 @@
           <div class="schedule-heading">
             <div>
               <p class="section-label">Октоберфест 2026</p><h2>Программа мероприятий</h2>
-              <p>Расписание отражает ориентировочный тайминг и программу фестиваля.</p>
+              <p>Краткая программа по актуальному таймингу. Все мероприятия и отдельные локации — во вкладке «Тайминг».</p>
             </div>
             <span class="calendar-badge">23–25.10</span>
           </div>
@@ -177,42 +239,45 @@
               <div class="program-day-heading"><span>23.10</span><small>Пятница · 16:00–22:00</small></div>
               <ol>
                 <li><time>16:00–19:00</time><div><strong>Интерактивы по парку</strong><p>Самостоятельное участие гостей в активностях.</p></div></li>
-                <li><time>17:00–18:00</time><div><strong>«Сказочная рулька»</strong><p>По сигналу ведущего в парке.</p></div></li>
-                <li><time>19:00–20:00</time><div><strong>«Сказочная рулька»</strong><p>Повторный выход по сигналу ведущего.</p></div></li>
+                <li><time>16:00–19:00</time><div><strong>Конкурсы ведущего</strong><p>Сцена. Точные старты конкурсов внутри блока не заданы.</p></div></li>
+                <li><time>16:00–22:00</time><div><strong>Фудовый МК «Брецели»</strong><p>Шатёр около Альпак; каждые 1,5–2 часа.</p></div></li>
+                <li><time>17:00–19:00</time><div><strong>«Сказочная рулька»</strong><p>Сцена. Одно окно подачи по сигналу ведущего.</p></div></li>
               </ol>
             </article>
 
             <article class="program-day">
               <div class="program-day-heading"><span>24.10</span><small>Суббота · 10:00–22:00</small></div>
               <ol>
+                <li><time>10:00–22:00</time><div><strong>Фудовый МК «Брецели»</strong><p>Шатёр около Альпак; каждые 1,5–2 часа.</p></div></li>
                 <li><time>11:00–14:00</time><div><strong>Детские мастер-классы</strong><p>Площадь перед сценой.</p></div></li>
-                <li><time>13:00–15:00</time><div><strong>«Сказочная рулька»</strong><p>По сигналу ведущего в парке.</p></div></li>
+                <li><time>13:00–15:00</time><div><strong>«Сказочная рулька»</strong><p>Сцена. По сигналу ведущего.</p></div></li>
                 <li><time>14:00–18:00</time><div><strong>Интерактивы с ведущим</strong><p>Выходы на сцене каждый час на 30–45 минут.</p></div></li>
                 <li><time>14:00–19:00</time><div><strong>Интерактивы по парку</strong><p>Фестивальный формат.</p></div></li>
-                <li><time>18:00–20:00</time><div><strong>«Сказочная рулька»</strong><p>По сигналу ведущего в парке.</p></div></li>
-                <li><time>18:00–21:00</time><div><strong>DJ-сет на сцене</strong><p>Сначала тематический, затем популярная программа.</p></div></li>
+                <li><time>18:00–20:00</time><div><strong>«Сказочная рулька»</strong><p>Сцена. По сигналу ведущего.</p></div></li>
+                <li><time>19:00–21:00</time><div><strong>DJ-сет на сцене</strong><p>Сначала тематический, затем популярная программа.</p></div></li>
               </ol>
             </article>
 
             <article class="program-day">
               <div class="program-day-heading"><span>25.10</span><small>Воскресенье · 10:00–22:00</small></div>
               <ol>
+                <li><time>10:00–22:00</time><div><strong>Фудовый МК «Брецели»</strong><p>Шатёр около Альпак; каждые 1,5–2 часа.</p></div></li>
                 <li><time>11:00–14:00</time><div><strong>Детские мастер-классы</strong><p>Площадь перед сценой.</p></div></li>
-                <li><time>13:00–15:00</time><div><strong>«Сказочная рулька»</strong><p>По сигналу ведущего в парке.</p></div></li>
+                <li><time>13:00–15:00</time><div><strong>«Сказочная рулька»</strong><p>Сцена. По сигналу ведущего.</p></div></li>
                 <li><time>14:00–18:00</time><div><strong>Интерактивы с ведущим</strong><p>Сцена.</p></div></li>
                 <li><time>14:00–19:00</time><div><strong>Интерактивы по парку</strong><p>Фестивальный формат.</p></div></li>
                 <li><time>16:00–18:00</time><div><strong>Спорт-бар</strong><p>Трансляция матча ЦСКА — Спартак в Лофте.</p></div></li>
-                <li><time>18:00–20:00</time><div><strong>«Сказочная рулька»</strong><p>По сигналу ведущего в парке.</p></div></li>
+                <li><time>18:00–20:00</time><div><strong>«Сказочная рулька»</strong><p>Сцена. По сигналу ведущего.</p></div></li>
               </ol>
             </article>
           </div>
 
-          <div class="program-note">Трансляция «Барселона — Реал Мадрид» в 23:00 рассматривается отдельно и не включена в основное окно фестиваля.</div>
+          <div class="program-note">Возможная трансляция «Барселона — Реал Мадрид»: 25.10 в 23:00 — 26.10 в 01:00, Лофт. Условный сеанс после закрытия фестиваля; часы указаны по файлу тайминга.</div>
 
           <section class="program-library" aria-label="Наполнение программы">
             <article class="program-content-card">
               <p class="section-label">Фудовый мастер-класс</p><h3>Брецель</h3>
-              <p>Каждые 1,5–2 часа. Шатёр около Альпак; при плохой погоде — район Лофта.</p>
+              <p>23.10 — 16:00–22:00; 24–25.10 — 10:00–22:00. Каждые 1,5–2 часа. Шатёр около Альпак; при плохой погоде — район Лофта.</p>
             </article>
             <article class="program-content-card">
               <p class="section-label">Детские мастер-классы</p><h3>Творческая программа</h3>
@@ -227,16 +292,60 @@
               <p>«Громовой удар», «Держи кружку», поедание сосисок и викторина по Октоберфесту.</p>
             </article>
             <article class="program-content-card">
-              <p class="section-label">Купоны и подарки</p><h3>Три уровня наград</h3>
-              <p>Пятница: 1 место — подарочная колбаска или бокал пива; 2 место — скидка 50%; 3 место — скидка 30%. Суббота и воскресенье: 1 место — подарочная колбаска или бокал пива + билет «Сезон»; 2 место — скидка 50% + билет «Стандарт»; 3 место — скидка 30% + билет «Стандарт». 300 купонов в день, 900 всего; билеты: 6 «Сезон» и 12 «Стандарт».</p>
+              <p class="section-label">Награды за участие</p><h3>Три призовых места</h3>
+              <p>1 место — купон на подарочную колбаску или бокал пива. 2 место — скидка 50% на одно блюдо в чеке. 3 место — скидка 30% на одно блюдо в чеке. В выходные для трёх конкурсов ведущего предусмотрены дополнительные билеты; викторина и парковые станции — по основной схеме.</p>
             </article>
+          </section>
+
+          <section class="program-section" aria-labelledby="prizes-heading">
+            <h3 id="prizes-heading">Призовые купоны по дням</h3>
+            <p>900 многоразовых купонов: по 300 на каждый день. Часть получает ведущий, часть — аниматоры парковых станций. На фуд-точке гость обменивает купон на продукт или скидку, купон забирают.</p>
+            <div class="table-wrap"><table class="prize-table"><caption class="visually-hidden">Купоны по видам и дням</caption><thead><tr><th scope="col">Вид купона</th><th scope="col">23.10 · Пт</th><th scope="col">24.10 · Сб</th><th scope="col">25.10 · Вс</th><th scope="col">Всего</th></tr></thead><tbody><tr><td>Подарок (подразумевается Подарочная колбаска или бокал пива)</td><td>100</td><td>97</td><td>97</td><td>294</td></tr><tr><td>Скидка 50% на любое одно блюдо в чеке</td><td>100</td><td>97</td><td>97</td><td>294</td></tr><tr><td>Скидка 30% на любое одно блюдо в чеке</td><td>100</td><td>97</td><td>97</td><td>294</td></tr><tr><td>Подарок (подразумевается Подарочная колбаска или бокал пива) + билет «Сезон»</td><td>0</td><td>3</td><td>3</td><td>6</td></tr><tr><td>Скидка 50% на любое одно блюдо в чеке + билет «Стандарт»</td><td>0</td><td>3</td><td>3</td><td>6</td></tr><tr><td>Скидка 30% на любое одно блюдо в чеке + билет «Стандарт»</td><td>0</td><td>3</td><td>3</td><td>6</td></tr></tbody><tfoot><tr><td>ИТОГО КУПОНОВ</td><td>300</td><td>300</td><td>300</td><td>900</td></tr></tfoot></table></div>
+            <p class="panel-note">Билеты добавляются к призам конкурсов «Громовой удар», «Держи кружку» и «Поедание сосисок» в субботу и воскресенье. Виды призов и количества — по Приложению 1.</p>
+          </section>
+          <section class="program-section" aria-labelledby="tickets-heading">
+            <h3 id="tickets-heading">Подарочные билеты</h3>
+            <p>Билеты готовятся отдельно от купонов: 6 «Сезон» и 12 «Стандарт», всего 18. Это дополнение к призовым купонам выходных, а не ещё 18 купонов.</p>
+            <div class="table-wrap"><table class="prize-table"><caption class="visually-hidden">Подарочные билеты по видам и дням</caption><thead><tr><th scope="col">Вид билета</th><th scope="col">23.10 · Пт</th><th scope="col">24.10 · Сб</th><th scope="col">25.10 · Вс</th><th scope="col">Всего</th></tr></thead><tbody><tr><td>«Сезон»</td><td>0</td><td>3</td><td>3</td><td>6</td></tr><tr><td>«Стандарт»</td><td>0</td><td>6</td><td>6</td><td>12</td></tr></tbody><tfoot><tr><td>ИТОГО БИЛЕТОВ</td><td>0</td><td>9</td><td>9</td><td>18</td></tr></tfoot></table></div>
+            <p class="panel-note">Количество совпадает в обновлённом графике подготовки, плане и программе: 18 билетов. Срок подготовки — 19.10.2026.</p>
+          </section>
+          <section class="program-section" aria-labelledby="menu-heading">
+            <h3 id="menu-heading">Пиво и блюда фестиваля</h3>
+            <div class="program-library">
+              <article class="program-content-card"><p class="section-label">5 сортов пива</p><h3>Ассортимент</h3><ul class="program-facts"><li><strong>Black Sheep</strong> — тёмное</li><li><strong>Krusovice</strong> — светлое</li><li><strong>Libenbrau</strong> — светлое</li><li><strong>Edelweiss</strong> — светлое нефильтрованное</li><li><strong>Libenweiss</strong> — пшеничное</li></ul></article>
+              <article class="program-content-card"><p class="section-label">Фудовая программа</p><h3>Блюда</h3><ul class="program-facts"><li>Колбаски разных сортов</li><li>Брецели</li><li>Крылья чили / барбекю</li><li>Кукуруза гриль</li><li>Шашлыки куриные и свиные</li><li>«Сказочная рулька» — с квашеной капустой и горчицей; подача по сигналу ведущего</li></ul></article>
+            </div>
+            <p class="panel-note">Плановый средний чек — 2 500 ₽. Цены отдельных блюд и напитков в программе не указаны; детальное ценообразование разрабатывается.</p>
+          </section>
+          <section class="program-section" aria-labelledby="games-heading">
+            <h3 id="games-heading">Как проходят активности</h3><p>Откройте название, чтобы увидеть механику и место проведения. Время каждого блока — во вкладке «Тайминг».</p>
+            <div class="program-library"><details class="program-content-card"><summary>Гонки с кружками</summary><p>Литровую кружку проносят на скорость через полосу препятствий. Учитываются время и объём оставшейся жидкости.</p><p><strong>Локация:</strong> Аллея напротив Блинной</p></details><details class="program-content-card"><summary>Угадай сорт пива</summary><p>Участник пробует скрытые сорта и определяет напиток вслепую.</p><p><strong>Локация:</strong> Напротив цепочной карусели, у «Кофе Джой»</p></details><details class="program-content-card"><summary>Метание брецеля</summary><p>Брецель набрасывают на горлышко бутылки или забрасывают в сосуд.</p><p><strong>Локация:</strong> Фуд-корт у верёвочного парка</p></details><details class="program-content-card"><summary>Бирпонг</summary><p>Участники бросают шарик для настольного тенниса в стаканы на противоположной стороне стола.</p><p><strong>Локация:</strong> Один из шатров «Нитро» — предложенный вариант</p></details><details class="program-content-card"><summary>Громовой удар</summary><p>Забить гвоздь в пень за минимальное число ударов узкой частью молотка.</p><p><strong>Локация:</strong> Сцена</p></details><details class="program-content-card"><summary>Держи кружку</summary><p>Держать полную кружку на вытянутой руке как можно дольше.</p><p><strong>Локация:</strong> Сцена</p></details><details class="program-content-card"><summary>Поедание сосисок</summary><p>Съесть заданное количество сосисок на скорость. Продолжительность конкурса — 2–3 минуты.</p><p><strong>Локация:</strong> Сцена</p></details><details class="program-content-card"><summary>Викторина по Октоберфесту</summary><p>Ответить на 5–7 вопросов по истории фестиваля.</p><p><strong>Локация:</strong> Сцена</p></details></div>
+          </section>
+          <section class="program-section" aria-labelledby="kids-heading">
+            <h3 id="kids-heading">Мастер-классы для детей</h3>
+            <p>Суббота и воскресенье, 11:00–14:00. Площадь перед сценой; в плане остаётся отметка об уточнении локации.</p>
+            <div class="program-library">
+              <article class="program-content-card"><h3>Крендель-мастерская</h3><p>Лепка брецеля из солёного теста с раскрашиванием. Цикл 20–25 минут.</p></article>
+              <article class="program-content-card"><h3>Осенний гербарий</h3><p>Открытки и закладки из сухих листьев и цветов. Цикл 15–20 минут.</p></article>
+              <article class="program-content-card"><h3>Музыкальная шкатулка</h3><p>Изготовление маракасов и бубнов, игра под баварскую музыку. Цикл 20 минут.</p></article>
+              <article class="program-content-card"><h3>Пряничная подкова</h3><p>Роспись готовых имбирных пряников глазурью. Цикл 20 минут, до 10–12 детей одновременно.</p></article>
+            </div>
+            <p class="panel-note">В тайминге перечислены четыре мастер-класса. Приложение 1 предлагает выбрать два и разместить их на одной локации; выбранная пара отдельно не названа.</p>
+          </section>
+          <section class="program-section" aria-labelledby="format-heading">
+            <h3 id="format-heading">Формат и условия проведения</h3>
+            <div class="program-library program-library--three">
+              <article class="program-content-card"><h3>При плохой погоде</h3><p>Ведущий — сцена Лофта. Интерактивы — рядом с Лофтом либо внутри. Фудовый мастер-класс — район Лофта. Лаунж-зона не используется.</p></article>
+              <article class="program-content-card"><h3>Музыка и оформление</h3><p>Аудиосопровождение ежедневно, тематический плейлист минимум на 3 часа с повторами. DJ-сет — в субботу 19:00–21:00. В брифе предусмотрены фото/видео, тематические гирлянды, сено и столы-бочки.</p></article>
+              <article class="program-content-card"><h3>Вне программы</h3><p>Фудовое шоу на сцене, звёздные гости и фейерверк не предусмотрены. Скидка на летние билеты за посещение трёх фестивалей не применяется.</p></article>
+            </div>
           </section>
         </section>
       </main>
 
       <footer>
         <span>Октоберфест 2026 · рабочий дашборд проекта</span>
-        <span>Источники: бюджет и график подготовки; программа — Приложение 1; бриф — версия 4.0; план задач — 01.10.2026</span>
+        <span>Источники: бюджет и график подготовки; программа — Приложение 1; бриф — версия 5.0; план задач и тайминг. Проверено в Nextcloud 13.10.2026</span>
       </footer>
     </div>
   </body>
