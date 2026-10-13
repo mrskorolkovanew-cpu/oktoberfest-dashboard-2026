@@ -225,16 +225,6 @@ function renderProgress() {
   }).join("");
 }
 
-function renderWorkstreams() {
-  const streams = Array.from(new Set(tasks.map(function (task) { return task.stream; })));
-  one("#workstream-grid").innerHTML = streams.map(function (stream) {
-    const list = tasks.filter(function (task) { return task.stream === stream; });
-    const done = list.filter(function (task) { return task.status === "Выполнено"; }).length;
-    const readiness = Math.round((done / list.length) * 100);
-    return '<article class="workstream-card"><h3>' + stream + '</h3><p>' + list.length + ' задач · ' + done + ' завершено</p><div class="workstream-meta"><span>готовность</span><strong>' + readiness + '%</strong></div></article>';
-  }).join("");
-}
-
 function renderFilters() {
   const streams = Array.from(new Set(tasks.map(function (task) { return task.stream; })));
   one("#status-filter").innerHTML = '<option value="all">Все статусы</option>' + statusOrder.map(function (status) {
@@ -357,7 +347,6 @@ window.addEventListener('hashchange', function () { showView(location.hash.slice
 function renderDashboard() {
   renderProgress();
   renderFocus();
-  renderWorkstreams();
   renderFilters();
   renderTaskTable();
 }
