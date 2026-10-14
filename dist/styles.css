@@ -53,8 +53,14 @@ h2 { color: var(--navy); font-size: 21px; letter-spacing: -.025em; margin-bottom
 .event-window span, .event-window small { display: block; font-size: 12px; }
 .event-window strong { color: var(--navy); display: block; margin: 3px 0; font-size: 26px; letter-spacing: -.04em; }
 .hero-information { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.hero-information--single { grid-template-columns: minmax(0, 1fr); }
 .hero-detail { background: #0d2135; border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
 .hero-detail .section-label { margin-bottom: 9px; }
+.hero-detail h2 { font-size: 16px; margin: 0 0 12px; }
+.hero-parameter-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 16px; margin: 0; }
+.hero-parameter-list div { border-top: 1px solid #24425c; padding: 8px 0; }
+.hero-parameter-list dt { color: var(--muted); font-size: 10px; margin-bottom: 3px; }
+.hero-parameter-list dd { color: #c9d9e8; font-size: 11px; line-height: 1.35; margin: 0; }
 .location-list { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: 1fr; gap: 7px; color: #c9d9e8; font-size: 12px; line-height: 1.35; }
 .location-list li { padding-left: 11px; position: relative; }
 .location-list li::before { content: ""; width: 4px; height: 4px; border-radius: 50%; background: var(--yellow); position: absolute; left: 0; top: .5em; }
@@ -72,12 +78,13 @@ h2 { color: var(--navy); font-size: 21px; letter-spacing: -.025em; margin-bottom
 .view-panel { display: none; }
 .view-panel.is-active { display: block; animation: fade-in .25s ease; }
 @keyframes fade-in { from { opacity: .3; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
-.kpi-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; margin-bottom: 16px; }
+.kpi-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; margin-bottom: 16px; }
 .kpi-card { background: var(--paper); min-height: 148px; padding: 19px 20px; border: 1px solid var(--line); border-radius: 12px; box-shadow: var(--shadow); position: relative; overflow: hidden; }
 .kpi-card::after { content: ""; height: 4px; width: 38px; background: var(--yellow); position: absolute; top: 0; left: 20px; }
 .kpi-card p { color: var(--muted); font-size: 12px; margin: 4px 0 15px; }
 .kpi-card strong { display: block; color: var(--navy); font-size: 27px; letter-spacing: -.04em; line-height: 1; margin-bottom: 10px; }
 .kpi-card span { color: var(--muted); font-size: 11px; line-height: 1.35; display: block; }
+.kpi-card--locations strong { font-size: 24px; }
 .dashboard-grid { display: grid; gap: 16px; margin-bottom: 16px; }
 .dashboard-grid--primary { grid-template-columns: 1.1fr .9fr; }
 .dashboard-grid--secondary { grid-template-columns: .85fr 1.15fr; }
@@ -175,7 +182,7 @@ td:nth-child(6) { min-width: 230px; }
 .budget-workbook-frame { display: block; width: 100%; min-height: 860px; border: 1px solid #2b4b66; border-radius: 8px; background: #fff; }
 footer { width: min(1260px, calc(100% - 48px)); margin: 0 auto; border-top: 1px solid var(--line); padding: 18px 0 30px; color: var(--muted); display: flex; justify-content: space-between; gap: 20px; font-size: 11px; line-height: 1.4; }
 @media (max-width:880px) { .hero { grid-template-columns: minmax(170px, .8fr) minmax(0, 1fr); row-gap: 12px; } .hero-information { grid-column: 1 / -1; } .kpi-grid { grid-template-columns: repeat(2,1fr); } .dashboard-grid--primary, .dashboard-grid--secondary, .budget-grid, .program-days { grid-template-columns: 1fr; } .budget-list { grid-template-columns: repeat(3,1fr); } }
-@media (max-width:620px) { main, footer { width: min(100% - 32px,1260px); } .topbar { padding: 13px 16px; } .topbar-meta { align-items: flex-end; flex-direction: column; gap: 5px; } .updated { font-size: 10px; } .hero { padding-top: 22px; grid-template-columns: 1fr; gap: 12px; } .hero-information, .location-list { grid-template-columns: 1fr; } .kpi-grid, .risk-list, .control-list, .budget-list, .program-library { grid-template-columns: 1fr; } .panel { padding: 17px; } .status-list { grid-template-columns: 1fr; } .schedule-heading { flex-direction: column; } .filters p { margin-left: 0; } .budget-workbook-frame { min-height: 720px; } footer { flex-direction: column; gap: 6px; } }
+@media (max-width:620px) { main, footer { width: min(100% - 32px,1260px); } .topbar { padding: 13px 16px; } .topbar-meta { align-items: flex-end; flex-direction: column; gap: 5px; } .updated { font-size: 10px; } .hero { padding-top: 22px; grid-template-columns: 1fr; gap: 12px; } .hero-information, .hero-parameter-list, .location-list { grid-template-columns: 1fr; } .kpi-grid, .risk-list, .control-list, .budget-list, .program-library { grid-template-columns: 1fr; } .panel { padding: 17px; } .status-list { grid-template-columns: 1fr; } .schedule-heading { flex-direction: column; } .filters p { margin-left: 0; } .budget-workbook-frame { min-height: 720px; } footer { flex-direction: column; gap: 6px; } }
 
 /* Тёмная подача в стилистике проектного дашборда Double Heart. */
 h1, h2,
@@ -242,16 +249,14 @@ button:focus-visible, a:focus-visible, select:focus-visible, .table-wrap:focus-v
 @media (max-width: 880px) { .program-library--three { grid-template-columns: 1fr; } }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .view-panel.is-active { animation: none; } }
 
-/* Event details are visible on the overview without opening another tab. */
-.overview-prizes { margin-bottom: 16px; }
-.overview-intro { color: var(--muted); font-size: 13px; line-height: 1.6; margin-bottom: 16px; }
-.overview-event-grid { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); }
-.overview-event-grid > .panel { min-width: 0; }
-.overview-menu-stack { display: grid; gap: 16px; min-width: 0; }
-.overview-tickets .prize-table { min-width: 430px; }
-.overview-tickets .prize-table th:first-child { width: 30%; }
+/* Сводные блоки обзора: меню — отдельной строкой, призы — в разбивке за три дня. */
+.overview-menu-grid, .overview-prize-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.overview-menu-grid > .panel, .overview-prize-grid > .panel { min-width: 0; }
+.overview-prize-grid .prize-table { min-width: 0; }
+.overview-prize-grid .prize-table th:first-child { width: auto; }
+.overview-prize-grid .prize-table td:nth-child(2), .overview-prize-grid .prize-table th:nth-child(2) { width: 146px; white-space: nowrap; }
 .overview-beer .program-facts, .overview-food .program-facts { list-style: none; padding: 0; }
 .overview-beer .program-facts li, .overview-food .program-facts li { padding: 10px 0; border-bottom: 1px solid var(--line); }
 .overview-beer .program-facts li + li, .overview-food .program-facts li + li { margin-top: 0; }
 .overview-beer .program-facts li:last-child, .overview-food .program-facts li:last-child { border-bottom: 0; }
-@media (max-width: 880px) { .overview-event-grid { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 880px) { .overview-menu-grid, .overview-prize-grid { grid-template-columns: minmax(0, 1fr); } }
