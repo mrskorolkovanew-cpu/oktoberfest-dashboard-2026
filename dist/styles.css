@@ -247,10 +247,11 @@ button:focus-visible, a:focus-visible, select:focus-visible, .table-wrap:focus-v
 .overview-intro { color: var(--muted); font-size: 13px; line-height: 1.6; margin-bottom: 16px; }
 .overview-event-grid { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); }
 .overview-event-grid > .panel { min-width: 0; }
+.overview-menu-stack { display: grid; gap: 16px; min-width: 0; }
 .overview-tickets .prize-table { min-width: 430px; }
 .overview-tickets .prize-table th:first-child { width: 30%; }
-.overview-beer .program-facts { list-style: none; padding: 0; }
-.overview-beer .program-facts li { padding: 10px 0; border-bottom: 1px solid var(--line); }
-.overview-beer .program-facts li + li { margin-top: 0; }
-.overview-beer .program-facts li:last-child { border-bottom: 0; }
+.overview-beer .program-facts, .overview-food .program-facts { list-style: none; padding: 0; }
+.overview-beer .program-facts li, .overview-food .program-facts li { padding: 10px 0; border-bottom: 1px solid var(--line); }
+.overview-beer .program-facts li + li, .overview-food .program-facts li + li { margin-top: 0; }
+.overview-beer .program-facts li:last-child, .overview-food .program-facts li:last-child { border-bottom: 0; }
 @media (max-width: 880px) { .overview-event-grid { grid-template-columns: minmax(0, 1fr); } }
