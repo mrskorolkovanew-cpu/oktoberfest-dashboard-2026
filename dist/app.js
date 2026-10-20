@@ -122,7 +122,7 @@ function statusFromNote(note, fallbackStatus) {
   if (value.includes("выполнено") && !value.includes("не выполнено")) return "Выполнено";
   if (value.includes("принято решение")) return "Выполнено";
   if (value.includes("изготовлено")) return "Частично выполнено";
-  if (value.includes("в процессе согласования") || value.includes("ожидается договор") || value.includes("заказ оформлен")) return "В работе";
+  if (value.includes("в работе") || value.includes("в процессе согласования") || value.includes("ожидается договор") || value.includes("заказ оформлен")) return "В работе";
   return fallbackStatus || "Не указан";
 }
 
